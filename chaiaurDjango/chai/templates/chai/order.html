@@ -1,11 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Chai</title>
-</head>
-<body>
-    <h1>Hi, Please order your chai here</h1>
-</body>
-</html>
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Order Chai Page
+{% endblock %}
+
+
+{% block content %}
+    <h1>Please select your chai</h1>
+    <ul>Masala Chai</ul>
+    <ul>Ginger Chai</ul>
+    <ul>Green Chai</ul>
+    <ul>Honey Chai</ul>
+{% endblock %}
+

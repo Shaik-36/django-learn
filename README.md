@@ -261,7 +261,7 @@ Layout.html
         
     </body>
     </html>
-    
+
 
 index.html
 
@@ -284,5 +284,121 @@ index.html
 ![alt text](image-2.png)
 
 
+ Now you can do the same for the all_chai.html
 
+all_chai.html
+
+    {% extends "layout.html" %}
+
+    {% block title %}
+        Chai Page
+    {% endblock %}
+
+
+    {% block content %}
+        <h1>All the chais available here</h1>
+    {% endblock %}
+
+
+
+
+## How to include Tailwind CSS in Django
+-> Useful link - https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+
+Install tailwind
+    python -m pip install django-tailwind
+
+Reload the Django-Tailwind
+    python -m pip install 'django-tailwind[reload]'
+
+Add 'tailwind' to INSTALLED_APPS in settings.py:
+
+    INSTALLED_APPS = [
+    # other Django apps
+    'tailwind',
+    ]
+
+Initialize the tailwind
+    python manage.py tailwind init
+
+Add your newly created 'theme' app to INSTALLED_APPS in settings.py:
+
+    INSTALLED_APPS = [
+    # other Django apps
+    'tailwind',
+    'theme'
+    ]
+
+Register the generated 'theme' app by adding the following line to settings.py file:
+
+    TAILWIND_APP_NAME = 'theme'
+
+
+Install Tailwind CSS dependencies, by running the following command:
+    python manage.py tailwind install
+
+Now in the theme/templates you will have a file 'base.html'
+
+From that file copy
+    {% load static tailwind_tags %}
+    {% tailwind_css %}
+
+Paste it in the layout.html file.
+
+Now you need to start another terminal for Tailwind CSS to work
+
+-> Start a new terminal and get into venv, and get to the manage.py file location
+
+    python manage.py tailwind start
+
+You need to restart the python server to make this working.
+
+And also add the NPM bin path to the settings.py - to make the tailwind run using node
+
+    NPM_BIN_PATH = "C:/Program Files/nodejs/npm.cmd"
+
+
+### Making hot re-loading accessable
+-> Go to chaiaurDjango/settings.py
+-> In INSTALLED_APPS - add
+    'django_browser_reload',
+
+-> In MIDDLEWARE - add
+    "django_browser_reload.middleware.BrowserReloadMiddleware"
+
+-> Go to urls.py - add
+    path("__reload__/", include("django_browser_reload.urls")),
+
+
+Now restart everything
+
+These commands are to be run in seperate terminals:
+
+    python manage.py runserver
+
+    python manage.py tailwind start
+
+
+
+### Migrations
+
+-> In Django, we never talk to SQL directly. Instead Django ORM talks with the SQL
+-> There are two commands for this
+    python manage.py migrate
+
+Now the databases are migrated - which means the tables are created in the database
+
+
+
+### Creating a super user
+-> Wriote this command in terminal
+    python manage.py createsuperuser
+
+-> create a user with password
+-> after tha start server and go to admin/ and login with the credentials
+
+
+
+## Handling Models and urls in Django
 
