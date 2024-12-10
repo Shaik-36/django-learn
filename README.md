@@ -1,43 +1,45 @@
 # Django Framework Setup
+This is a beginner friendly guide to how to start building apps using django.
 
+In python, we always create a virtual environment to isolate the dependencies and also have a local environment for easy build and deployment
 
 ### Old way of creating Virtual environment
--> python -m venv .venv
+    python -m venv .venv
 
 
 ### uv is exptereamly fast package manager written in rust
 ### Install the uv using pip
--> pip install uv
+     pip install uv
 
 
 ### Creates a new virtual environment using uv at .venv
--> uv venv
+    uv venv
 
 # Setting Execution Policy
 ### Set Execution Policy for Current User: Applies the RemoteSigned policy to your user account only.
--> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+     Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### This will initilize the virtual environment
--> .venv/Scripts/activate
+     .venv/Scripts/activate
 
 
 ### Install Django using uv
--> uv pip install Django
+     uv pip install Django
 
 ### Start Django Projeect
--> django-admin startproject chaiaurDjango
+    django-admin startproject chaiaurDjango
 
 ### Go to Project folder
--> cd chaiaurDjango
+    cd chaiaurDjango
 
 ### Run the app using manage.py and runserver
--> python manage.py runserver
+    python manage.py runserver
 
 ### Now the server will be running at port 8000
--> Check out the app - http://127.0.0.1:8000/
+    Check out the app - http://127.0.0.1:8000/
 
 ### If you want to run on specific port. Ex- port - 8001
--> python manage.py runserver 8001
+    python manage.py runserver 8001
 
 
 ## File Exploration
@@ -78,10 +80,10 @@ Why it's used: It stores your application's data (like user accounts, blog posts
 When to use: SQLite is great for small projects or learning. For larger projects, you might switch to PostgreSQL or MySQL.
 
 ### Summary of Key Files:
--> settings.py: Configure your project (apps, database, etc.).
--> urls.py: Map URLs to views (webpages).
--> manage.py: Command-line tool for running the server and managing the project.
--> db.sqlite3: Your database.
+    settings.py: Configure your project (apps, database, etc.).
+    urls.py: Map URLs to views (webpages).
+    manage.py: Command-line tool for running the server and managing the project.
+    db.sqlite3: Your database.
 As a beginner, focus on settings.py, urls.py, and manage.py as they are the most crucial for understanding Django projects.
 
 
@@ -105,15 +107,15 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
 
     Ex- path('about/', views.about, name='about')
 
-        -> views.about  - is the routing
-        -> 'about/'     - is the url when this is hit it will return the logic of that funciton/method 
+            views.about  - is the routing
+            'about/'     - is the url when this is hit it will return the logic of that funciton/method 
 
 
 ## Templates and Static in Django
 ![alt text](image.png)
--> On the root folder create a folder called 'templates'        -   Stores HTML files
+    On the root folder create a folder called 'templates'        -   Stores HTML files
 
--> Create another fodler called 'static'                        -   Stores CSS, JavaScript files
+    Create another fodler called 'static'                        -   Stores CSS, JavaScript files
 
 
 ### Templates
