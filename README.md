@@ -1,48 +1,48 @@
 # Django Framework Setup
 
 
-# Old way of creating Virtual environment
+### Old way of creating Virtual environment
 -> python -m venv .venv
 
 
-# uv is exptereamly fast package manager written in rust
-# Install the uv using pip
+### uv is exptereamly fast package manager written in rust
+### Install the uv using pip
 -> pip install uv
 
 
-# Creates a new virtual environment using uv at .venv
+### Creates a new virtual environment using uv at .venv
 -> uv venv
 
 # Setting Execution Policy
-# Set Execution Policy for Current User: Applies the RemoteSigned policy to your user account only.
+### Set Execution Policy for Current User: Applies the RemoteSigned policy to your user account only.
 -> Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 
-# This will initilize the virtual environment
+### This will initilize the virtual environment
 -> .venv/Scripts/activate
 
 
-# Install Django using uv
+### Install Django using uv
 -> uv pip install Django
 
-# Start Django Projeect
+### Start Django Projeect
 -> django-admin startproject chaiaurDjango
 
-# Go to Project folder
+### Go to Project folder
 -> cd chaiaurDjango
 
-# Run the app using manage.py and runserver
+### Run the app using manage.py and runserver
 -> python manage.py runserver
 
-# Now the server will be running at port 8000
+### Now the server will be running at port 8000
 -> Check out the app - http://127.0.0.1:8000/
 
-# If you want to run on specific port. Ex- port - 8001
+### If you want to run on specific port. Ex- port - 8001
 -> python manage.py runserver 8001
 
 
-# File Exploration
+## File Exploration
 
-## manage.py
+### manage.py
 This file is the starting point for the app. This file sets the environment varialbles and many other
 -> What it does: The main command-line tool for interacting with your project.
 -> What you can do:
@@ -54,7 +54,7 @@ This file is the starting point for the app. This file sets the environment vari
 You’ll use this file a lot during development.
 
 
-## settings.py
+### settings.py
 What it does: The most important file for your project settings.
 What it contains:
     -> Database configurations (SQLite is the default).
@@ -64,7 +64,7 @@ What it contains:
 When to use: Modify this file to set up your database, installed apps, and project-specific settings.
 
 
-## urls.py
+### urls.py
 
 What it does: Manages the URL routing for your application.
 What it contains:
@@ -72,12 +72,12 @@ What it contains:
     -> When to use: Add new paths here to handle different parts of your website.
 
 
-## db.sqlite3
+### db.sqlite3
 What it is: The default database for your project (SQLite).
 Why it's used: It stores your application's data (like user accounts, blog posts, etc.).
 When to use: SQLite is great for small projects or learning. For larger projects, you might switch to PostgreSQL or MySQL.
 
-## Summary of Key Files:
+### Summary of Key Files:
 -> settings.py: Configure your project (apps, database, etc.).
 -> urls.py: Map URLs to views (webpages).
 -> manage.py: Command-line tool for running the server and managing the project.
@@ -87,18 +87,18 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
 
 
 
-# Creating basic views and urls
+### Creating basic views and urls
 -----------------------------------------------------------------
 |    User -> req -> urls -> views    (<- responses back)        |
 -----------------------------------------------------------------
 
-## Create view.py in the folder where urls.py is
+### Create view.py in the folder where urls.py is
 
 -> Write the logic code.
 -> views are similar to controllers in JavaScript where all the logic is written
 -> create three functions/methods. home, about, contact. Return some text
 
-## urls.py 
+### urls.py 
 -> This works as router
 -> Now write the code for different paths
 -> Name the paths - home, about, contact and route them to the functions/methods in views file
@@ -109,17 +109,17 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
         -> 'about/'     - is the url when this is hit it will return the logic of that funciton/method 
 
 
-# Templates and Static in Django
+## Templates and Static in Django
 ![alt text](image.png)
 -> On the root folder create a folder called 'templates'        -   Stores HTML files
 
 -> Create another fodler called 'static'                        -   Stores CSS, JavaScript files
 
 
-## Templates
+### Templates
 -> Inside create a file 'index.html'
 
-## How to show index.html on root url ?
+### How to show index.html on root url ?
 -> To do this we have to render the tempalte
 -> go to views.py - modify the code
     
@@ -127,7 +127,7 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
       return render(request, 'index.html')
 
 
-## Set the views to render on views in setting
+### Set the views to render on views in setting
 -> The home page above will not render because in the settings the templates folder is not defined in directories
 -> go to settings.py 
 -> check for 'TEMPLATES' array
@@ -139,7 +139,7 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
 -> But you have to modify it in the views -> return render(request, 'website/index.html')
 
 
-## How to show CSS and JavaScript in Django
+### How to show CSS and JavaScript in Django
 -> In Static create a file 'style.css'
 -> Now to link css to index.html we need to do 'templating engine' 
 
@@ -161,7 +161,7 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
 -> Now you can see the css working
 
 
-# Creating apps in Django
+## Creating apps in Django
 -> python manage.py startapp <App Name> 
     Ex- python manage.py startapp chai
 
