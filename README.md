@@ -254,9 +254,10 @@ index.html
 
 
 
-![
-    
-    You will be able to see the Nav Bar and Home Page
-](image-1.png)
+-> You will be able to see the Nav bar and home page
+
+![alt text](image-2.png)
+
+
 
 
