@@ -401,4 +401,125 @@ Now the databases are migrated - which means the tables are created in the datab
 
 
 ## Handling Models and urls in Django
+-> The models are only in apps and never in Project
+-> Now we will study about how these models.py and admin.py routings happen
+
+-> For database we can directly write the models in models.py
+
+-> If you go to chaiaurDjango/settings. py and look for DATABASES. 
+-> You will see the Engine. we can change these engines to postgre, mySql
+-> we never need to change the code to change the database we just need to change the configuration in the settings.py
+-> check out for guide here - https://docs.chaicode.com/django-models/
+
+
+-> Go to chai/model.py
+ add the code
+
+-> Install pillow
+    python -m pip install Pillow
+
+-> Now to let settings.py know that we will be uploading the images
+-> Go to settings.py - add code
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
+-> Now we need to tell urls as well for this thing
+-> Go to urls.py
+
+    from django.conf import settings
+    from django.conf.urls.static import static 
+
+-> In this above code we are telling the static method that in the settings.py MEDIA_URL and ROOT to get it loaded.
+-> Again in urls.py - add code
+
+        url_patterns = [ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+-> This aboove is what connects the statics with settings.py
+
+
+-> Actually, the Django project is not aware of this newly created model
+-> To informt that we have to perform the below step
+
+    python manage.py makemigrations
+
+-> You will see a new folder and in it you will see a  folder migrations and a file in it called '0001_initial' 
+-> if you see in that it is notting but sql queries
+
+-> Now we can migrate this model to SQL by using below command
+    python manage.py migrate
+
+
+### Use of admin.py in (chai/)
+-> Now you can attach any model to admin.py and see it in the admin
+-> Lets do that now
+-> go to admin.py - add the model to this admin using below code
+
+    from .models import ChaiVarity
+
+    # Register your models here.
+    admin.site.register(ChaiVarity)
+
+-> Reload the server and see the admin page
+![alt text](image-3.png)
+
+In the image above you can see that Chai Varity method is added to the admin with just 2 lines of code
+When you click on add you will be able to add the data directly to sql. see below image for reference
+
+![alt text](image-4.png)
+
+
+## Taking the database data to frontend and showing them
+-> Now we will try to list all the chai varity data in the all_Chai.html (frontend)
+-> Go to chai/views.py
+
+    from .models import ChaiVarity
+
+    # Create your views here.
+    def all_chai(request):
+    chais = ChaiVarity.objects.all()
+    return render(request, 'chai/all_chai.html', {'chais': chais})
+
+
+-> Now go to templates/all_chai.html
+
+    {% block content %}
+
+    <h1>All the chais available here</h1>
+
+
+    {% for chai in chais %}
+
+        <div class="chai-item">
+            <img src="{{chai.image.url}}" alt="" srcset="">
+        </div>
+
+    {% endfor %}
+    
+
+    {% endblock %}
+
+-> Now lets add some Tailwind CSS
+-> Add new terminal - python manage.py tailwind start
+
+
+## Adding one more data field - Description and price
+-> In model.py
+
+    description = models.TextField(default="")
+    price = models.FloatField()
+
+
+-> Noe because we made changes in model - we need to migrate the new model to database
+
+    python manage.py makemigrations
+
+    python manage.py migrate
+
+    python manage.py runserver
+
+
+### Click on the link and see the details of page
+-> To perform this we need to create a new view for this
+-> Go to views.py in chai/
 
