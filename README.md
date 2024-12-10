@@ -113,11 +113,12 @@ As a beginner, focus on settings.py, urls.py, and manage.py as they are the most
 
 ## Templates and Static in Django
 ![alt text](image.png)
+
     On the root folder create a folder called 'templates'        -   Stores HTML files
 
     Create another fodler called 'static'                        -   Stores CSS, JavaScript files
 
-
+ 
 ### Templates
 -> Inside create a file 'index.html'
 
@@ -226,5 +227,36 @@ step-3
 -> Now run the project and hit the http://127.0.0.1:8000/chai url and see the output
 
 -> Now like this you can create as many apps as you want
+
+
+
+### Now how can we apply css and JavaScript to this new app called chai
+-> Lets create a tempalting 
+-> go to the main /tempalte
+-> create a file inside it called 'layout.html'
+-> This layout file will be the base template for all the html files.
+-> Now erase all the code in 'index.html'
+-> After that we will define the layout as template in index.html
+
+index.html
+
+    {% extends "layout.html" %}
+
+    {% block title %}
+        Home Page
+    {% endblock %}
+
+    {% block content %}
+        <h1>This is our home page</h1>
+    {% endblock %}
+
+
+
+
+
+![
+    
+    You will be able to see the Nav Bar and Home Page
+](image-1.png)
 
 
