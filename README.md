@@ -500,7 +500,9 @@ When you click on add you will be able to add the data directly to sql. see belo
     {% endblock %}
 
 -> Now lets add some Tailwind CSS
--> Add new terminal - python manage.py tailwind start
+-> Add new terminal - and start the tailwind
+    
+        python manage.py tailwind start
 
 
 ## Adding one more data field - Description and price
@@ -520,6 +522,71 @@ When you click on add you will be able to add the data directly to sql. see belo
 
 
 ### Click on the link and see the details of page
+-> first of all we need to map the link to the repective chai details to show
+-> go to chai/all_chai.html
+
+`all_chai.html`
+
+        <a href="{% url 'chai_details' chai.id %}">
+            <button
+            type="button"
+            width="100%"
+            class="inline-flex items-center justify-center w-[100%] px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600
+            hover:bg-orange-700
+            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orage-500"
+            >
+                {{chai.type}} -{{chai.id}}
+            </button>
+        </a>
+
 -> To perform this we need to create a new view for this
 -> Go to views.py in chai/
 
+    from .models import ChaiVarity
+
+    from django.shortcuts import get_object_or_404
+
+    def chai_details(request, chai_id):
+    chai = get_object_or_404(ChaiVarity, pk=chai_id)
+    return render(request, 'chai/chai_details.html', {'chai': chai})
+
+-> Now go to chai/urls.py
+
+    from django.urls import path
+    from . import views
+
+    urlpatterns = [
+                    path('<int:chai_id>/', views.chai_details, name='chai_details'),
+                  ]
+
+
+
+-> Now after that go to `chai/templates/chai/chai_details.html`
+
+`chai_details.html`
+
+            {% extends "layout.html" %}
+
+            {% block title %}
+                Chai Detais Page
+            {% endblock %}
+
+
+            {% block content %}
+
+            <h2>Chai Details: </h2>
+                <h3>{{chai.name}}</h3>
+                <h3>{{chai.description}}</h3>
+                <h3>{{chai.price}}</h3>
+
+            {% endblock %}
+
+-> Now you were able to show up the data from the database to the frontend
+
+-> Run the server again
+
+        python manage.py runserver
+
+-> Add new terminal - and start the tailwind
+    
+        python manage.py tailwind start

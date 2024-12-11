@@ -1,6 +1,4 @@
-
 {% load static tailwind_tags %}
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,10 +13,24 @@
     <link rel="stylesheet" href="{% static 'style.css' %}">
     {% tailwind_css %}
 </head>
-<body>
-    <nav>This is our nav bar</nav>
-    {% block content %}{% endblock %}
-    
-    
+<body class="bg-gray-100 text-gray-800">
+    <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+        <div class="text-xl font-bold text-gray-700">Chai Hub</div>
+        <div>
+            <a href="#" class="text-gray-600 hover:text-gray-900 px-4">Home</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 px-4">Menu</a>
+            <a href="#" class="text-gray-600 hover:text-gray-900 px-4">Contact</a>
+        </div>
+    </nav>
+
+    <main class="py-8">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="bg-white shadow-inner p-4 mt-8 text-center">
+        <p class="text-gray-600">&copy; 2024 Chai Hub. All Rights Reserved.</p>
+    </footer>
+
+
 </body>
 </html>

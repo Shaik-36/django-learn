@@ -1,40 +1,33 @@
-
 {% extends "layout.html" %}
 
 {% block title %}
     Chai Page
 {% endblock %}
 
-
-
 {% block content %}
 
-    <h1>All the chais available here</h1>
+<div class="min-h-screen bg-gray-100 py-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">All the Chais Available Here</h1>
 
-<div class="grid grid-cols-3 gap-4 m-4 w-200 h-200">
-    {% for chai in chais %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-7xl px-4">
+        {% for chai in chais %}
 
-        <div class="bg-blue-500 p-5 rounded  hover:bg-blue-550 transition-transform duration-300">
-            <img class="rounded-lg shadow-lg transition-transform duration-300 hover:scale-110" src="{{chai.image.url}}" alt="" srcset="">
-            <h3 class="text-2xl font-bold" >{{chai.name}}</h3>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
+            <img class="w-full h-48 object-cover" src="{{ chai.image.url }}" alt="{{ chai.name }}">
+            <div class="p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">{{ chai.name }}</h3>
+                <a href="{% url 'chai_details' chai.id %}">
+                    <button
+                        type="button"
+                        class="w-full px-4 py-2 bg-orange-600 text-white font-medium text-sm rounded-md hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2">
+                        {{ chai.type }} - {{ chai.id }}
+                    </button>
+                </a>
+            </div>
+        </div>
 
-        <a href="{% url 'chai_details' chai.id %}">
-            <button
-            type="button"
-            width="100%"
-            class="inline-flex items-center justify-center w-[100%] px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600
-            hover:bg-orange-700
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orage-500"
-            >
-                {{chai.type}} -{{chai.id}}
-            </button>
-        </a>
-
+        {% endfor %}
     </div>
-
-    {% endfor %}
 </div>
 
 {% endblock %}
-
-
