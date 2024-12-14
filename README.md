@@ -651,3 +651,17 @@ When you click on add you will be able to add the data directly to sql. see belo
             return self.name
 
 
+-> **** Now after adding the models we have to migrate these models to database and restart the server. R
+
+Run the below scripts one by one in the terminal:
+
+    python manage.py makemigrations
+    python manage.py migrate
+    python manage.py runserver
+
+
+-> Now to add some data to these models we can do it using admin console.
+
+-> Go to chai/admin.py
+
+

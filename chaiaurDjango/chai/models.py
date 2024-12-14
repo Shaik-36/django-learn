@@ -46,9 +46,13 @@ class Store(models.Model):
         return self.name
     
 # One to One
-class ChaiIngredient(models.Model):
-    chai = models.OneToOneField(ChaiVarity, on_delete=models.CASCADE, related_name='Ingredient')
-    Ingredient_name= models.CharField(max_length=100)
+class ChaiCertificate(models.Model):
+    chai = models.OneToOneField(ChaiVarity, on_delete=models.CASCADE, related_name='certificate')
+    
+    certificate_number = models.CharField(max_length=100)
+    issued_date = models.DateTimeField(default=timezone.now)
+    valid_untill = models.DateTimeField()
+
 
     def __str__(self):
-        return self.name
+        return f'Certificate for {self.chai.name}'
