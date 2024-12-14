@@ -18,3 +18,6 @@ def chai_details(request, chai_id):
 
 def order(request):
     return render(request, 'chai/order.html')
+
+def chai_store_view(request):
+    return render(request, 'chai/chai_stores.html')

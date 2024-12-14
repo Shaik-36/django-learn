@@ -665,3 +665,36 @@ Run the below scripts one by one in the terminal:
 -> Go to chai/admin.py
 
 
+### Adding forms in Django Project
+
+-> here we will create a new layout and write urls
+
+-> First lets added the template - Go to Chai/tempaltes/chai/ create tempalte 'chai_stores.html
+
+    {%{% extends "layout.html" %}%}
+
+    {% block content %}
+
+    test content for forms
+
+    {% endblock %}
+
+
+-> Now to add content you have to add `views` and add `urls` to redirect - for the stores
+
+-> Go to chai/views.py
+
+    def chai_store_view(request):
+    return render(request, 'chai/chai_stores.html')
+
+-> Go to chai/urls.py
+
+    urlpatterns = [
+        path('chai_stores/', views.chai_store_view, name='chai_store'),
+    ]
+
+
+-> Now we will make a form in chai-stores.html, where all the chais are listed in a dropdown meny and then you select any chai then all the stores that has that chai will showup
+
+
+-> 
