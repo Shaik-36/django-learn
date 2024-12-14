@@ -590,3 +590,64 @@ When you click on add you will be able to add the data directly to sql. see belo
 -> Add new terminal - and start the tailwind
     
         python manage.py tailwind start
+
+
+## Adding Relation Models in Django
+
+-> Go to chai/models/py 
+
+-> Here we have already made a model called ChaiVarity
+
+-> Now we will try to build more models. So that we can make relationships in between them
+
+-> The models we will build here are... 
+
+-> First, We already have a user model in django which is in-built.we can import that model and use it.
+
+    from django.contrib.auth.models import User
+
+### Now lets talk about differnt types of models
+
+#### Many to One
+
+-> This can be Reviews of chai. Now you can define this model first in the same file as a class.
+-> Now to connect this Many reviewd to One chai model(ChaiVarity) we use ForeignKey()
+
+    class ChaiReview(models.Model):
+        chai = models.ForeignKey(ChaiVarity, on_delete=models.CASCADE, related_name='reviews')
+        user = models.ForeignKey(User, on_delete=models.CASCADE )
+        rating = models.IntegerField()
+        comment = models.TextField()
+        date_added = models.DateTimeField(default=timezone.now)
+
+        def __str__(self):
+            return f'{self.user.username} review for {self.chai.name}'
+
+-> models.CASCADE ensures that when a ChaiVarity instance is deleted, all associated ChaiReview instances are also deleted automatically.
+-> the __str__ function is for the custum object representation in the admin console
+
+
+#### Many to Many
+
+-> Many stores can have many chais
+
+    class Store(models.Model):
+        name = models.CharField(max_length=100)
+        location = models.CharField(max_length=100)
+        chai_varities = models.ManyToManyField(ChaiVarity, related_name='stores')
+
+        def __str__(self):
+            return self.name
+        
+#### One to One
+
+-> One chai has one main ingredient aame
+
+    class ChaiIngredient(models.Model):
+        chai = models.OneToOneField(ChaiVarity, on_delete=models.CASCADE, related_name='Ingredient')
+        Ingredient_name= models.CharField(max_length=100)
+
+        def __str__(self):
+            return self.name
+
+
