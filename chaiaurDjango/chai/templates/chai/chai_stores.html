@@ -1,8 +1,35 @@
-
 {% extends "layout.html" %}
 
 {% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+    <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-semibold text-gray-800 text-center mb-4">Search Stores</h1>
+        
+        <form method="POST" class="space-y-4">
+            {% csrf_token %}
+            <div class="space-y-2">
+                {{ form.as_p }}
+            </div>
+            <button 
+                type="submit" 
+                class="w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors">
+                Search Stores
+            </button>
+        </form>
 
-test content for forms
-
+        {% if stores %}
+        <div class="mt-6">
+            <h2 class="text-xl font-semibold text-gray-700 text-center mb-4">Stores Available</h2>
+            <ul class="space-y-2">
+                {% for store in stores %}
+                <li class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                    <span class="font-semibold">{{ store.name }}</span> - 
+                    <span class="text-gray-600">{{ store.location }}</span>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock %}

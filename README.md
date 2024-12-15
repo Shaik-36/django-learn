@@ -694,7 +694,62 @@ Run the below scripts one by one in the terminal:
     ]
 
 
--> Now we will make a form in chai-stores.html, where all the chais are listed in a dropdown meny and then you select any chai then all the stores that has that chai will showup
+-> Now we will make a form in chai-stores.html, where all the chais are listed in a dropdown meny and then you select any chai then all the stores that has that chai available will show-up
 
 
--> 
+-> Create a file called 'form.py' in chai/form.py
+
+    from django import forms
+    from .models import ChaiVarity
+
+
+    class ChaiVarityForm(forms.Form):
+        chai_varity = forms.ModelChoiceField(queryset=ChaiVarity.objects.all(), label='Select Chai Varity')
+
+
+-> Now go to chai/views
+-> Modify the below code to add the scenario of options to render
+
+def chai_store_view(request):
+    return render(request, 'chai/chai_stores.html')
+-> The updated views.py
+
+    from .models import ChaiVarity, Store
+    from .forms import ChaiVarityForm
+
+
+    def chai_store_view(request):
+        stores = None
+        if request.method == 'POST':
+            form = ChaiVarityForm(request.POST)
+            if form.is_valid():
+                chai_variety = form.cleaned_data['chai_varity']
+
+                # Match the filtered chai_varity from the whole model store -> chai_varities (Models->Store->chai_varities)
+                stores = Store.objects.filter(chai_varities=chai_variety)             # From Models -> Stores Method -> variable chai_varities
+        else:
+                form= ChaiVarityForm()
+
+        # Send the stores and form that we created in this function
+        return render(request, 'chai/chai_stores.html', {'stores': stores, 'form': form} )
+
+
+-> Now to display these details we need to work on front end. 
+-> Go to Chai/chai_stores.html
+
+-> add the below code next to the test text
+
+    test content for forms
+
+    <form action="" method="post">
+
+        {{form}}
+
+    </form>
+
+
+-> Now to show the stores that has that chai varity avaialbe
+-> Go to chai/chai_details.html - add the frontend code
+
+-> Then start the server and go to website - http://127.0.0.1:8000/chai/chai_stores/
+
