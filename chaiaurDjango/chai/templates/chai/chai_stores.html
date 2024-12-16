@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
-    <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+    <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
         <h1 class="text-2xl font-semibold text-gray-800 text-center mb-4">Search Stores</h1>
         
         <form method="POST" class="space-y-4">
@@ -20,14 +20,24 @@
         {% if stores %}
         <div class="mt-6">
             <h2 class="text-xl font-semibold text-gray-700 text-center mb-4">Stores Available</h2>
-            <ul class="space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                 {% for store in stores %}
-                <li class="bg-gray-100 p-4 rounded-lg shadow-sm">
-                    <span class="font-semibold">{{ store.name }}</span> - 
-                    <span class="text-gray-600">{{ store.location }}</span>
-                </li>
+                <div class="bg-gray-100 p-4 rounded-lg shadow-md">
+                    {% if store.store_image %}
+                    <div class="w-full h-48 bg-gray-200 rounded-lg overflow-hidden">
+                        <img 
+                            src="{{ store.store_image.url }}" 
+                            alt="{{ store.name }}" 
+                            class="w-full h-full object-cover">
+                    </div>
+                    {% endif %}
+                    <div class="mt-4 text-center">
+                        <span class="block font-semibold text-lg text-gray-800">{{ store.name }}</span>
+                        <span class="block text-gray-600">{{ store.location }}</span>
+                    </div>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </div>
         {% endif %}
     </div>

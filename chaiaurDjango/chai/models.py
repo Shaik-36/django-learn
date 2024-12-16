@@ -40,6 +40,8 @@ class ChaiReview(models.Model):
 class Store(models.Model):
     name = models.CharField(max_length=100)
     location = models.CharField(max_length=100)
+    store_image = models.ImageField(upload_to='stores/', null=True, blank=True)
+    
     chai_varities = models.ManyToManyField(ChaiVarity, related_name='stores')
 
     def __str__(self):
